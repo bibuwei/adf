@@ -244,6 +244,51 @@
 				"[concat(variables('factoryId'), '/linkedServices/Hive')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/hadoop_streaming')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "hadoop_Streaming",
+						"type": "HDInsightStreaming",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"mapper": "mapper.exe",
+							"reducer": "reduce.exe",
+							"filePaths": [
+								"streaming/mapper.exe",
+								"streaming/reduce.exe"
+							],
+							"input": "wasbs://streaming@sqlva6k4znare7lhkk.blob.core.windows.net/davinci.txt",
+							"output": "wasbs://streaming@sqlva6k4znare7lhkk.blob.core.windows.net/output/wc.txt",
+							"fileLinkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "Hive",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Hive')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
 		}
 	]
 }
