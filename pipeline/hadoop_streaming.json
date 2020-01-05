@@ -1,0 +1,39 @@
+{
+	"name": "hadoop_streaming",
+	"properties": {
+		"activities": [
+			{
+				"name": "hadoop_Streaming",
+				"type": "HDInsightStreaming",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"mapper": "mapper.exe",
+					"reducer": "reduce.exe",
+					"filePaths": [
+						"streaming/mapper.exe",
+						"streaming/reduce.exe"
+					],
+					"input": "wasbs://streaming@sqlva6k4znare7lhkk.blob.core.windows.net/davinci.txt",
+					"output": "wasbs://streaming@sqlva6k4znare7lhkk.blob.core.windows.net/output/wc.txt",
+					"fileLinkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Hive",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
