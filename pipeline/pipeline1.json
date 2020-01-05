@@ -13,9 +13,8 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "hive1/HiveScript.txt",
+					"scriptPath": "scrips/HiveScript.txt",
 					"scriptLinkedService": {
 						"referenceName": "AzureBlobStorage1",
 						"type": "LinkedServiceReference"
