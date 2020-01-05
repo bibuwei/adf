@@ -222,9 +222,9 @@
 						"typeProperties": {
 							"jarFilePath": "mapreduceactiviryinput/hadoop-mapreduce-examples.jar",
 							"arguments": [
-								"wasb://mapreduceactivityinput@adfbookblobsampledata.blob.core.windows.net/davinci.txt \nwasb://mapreduceactivityoutput@adfbookblobsampledata.blob.core.windows.net/"
+								"wasb://mapreduceactivityinput@adfbookblobsampledata.blob.core.windows.net/davinci.txt wasb://mapreduceactivityoutput@adfbookblobsampledata.blob.core.windows.net/"
 							],
-							"getDebugInfo": "Failure",
+							"getDebugInfo": "Always",
 							"className": "wordcount",
 							"jarLibs": [],
 							"jarLinkedService": {
