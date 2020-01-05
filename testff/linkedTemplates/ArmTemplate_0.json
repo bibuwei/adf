@@ -121,8 +121,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
-				"[concat(variables('factoryId'), '/linkedServices/Azureadls')]"
+				"[concat(variables('factoryId'), '/linkedServices/Azureadls')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
@@ -132,7 +132,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Hive11",
+						"name": "Hive1",
 						"type": "HDInsightHive",
 						"dependsOn": [],
 						"policy": {
@@ -144,7 +144,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"scriptPath": "hive1/HiveScript.txt",
+							"scriptPath": "scrips/HiveScript.txt",
 							"scriptLinkedService": {
 								"referenceName": "AzureBlobStorage1",
 								"type": "LinkedServiceReference"
@@ -159,8 +159,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Hive')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
+				"[concat(variables('factoryId'), '/linkedServices/Hive')]"
 			]
 		}
 	]
