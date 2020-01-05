@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'Hive'"
 		},
+		"spark_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'spark'"
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"type": "string",
 			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
@@ -42,6 +46,10 @@
 		"Hive_properties_typeProperties_tenant": {
 			"type": "string",
 			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"spark_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		}
 	},
 	"variables": {
@@ -287,6 +295,70 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Hive')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/spark')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "HID_Spark",
+						"type": "HDInsightSpark",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"rootPath": "hdisparkactivity",
+							"entryFilePath": "main.py",
+							"sparkJobLinkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "spark",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/spark')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/spark')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HDInsight",
+				"typeProperties": {
+					"clusterUri": "https://adfbooktestcluster.azurehdinsight.net",
+					"userName": "[parameters('spark_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('spark_password')]"
+					},
+					"isEspEnabled": false,
+					"linkedServiceName": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		}

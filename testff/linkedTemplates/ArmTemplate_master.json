@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'Hive'"
 		},
+		"spark_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'spark'"
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"type": "string",
 			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
@@ -42,6 +46,10 @@
 		"Hive_properties_typeProperties_tenant": {
 			"type": "string",
 			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"spark_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		},
 		"containerUri": {
 			"type": "string",
@@ -85,6 +93,9 @@
 					"Hive_servicePrincipalKey": {
 						"value": "[parameters('Hive_servicePrincipalKey')]"
 					},
+					"spark_password": {
+						"value": "[parameters('spark_password')]"
+					},
 					"Hive_properties_typeProperties_hostSubscriptionId": {
 						"value": "[parameters('Hive_properties_typeProperties_hostSubscriptionId')]"
 					},
@@ -96,6 +107,9 @@
 					},
 					"Hive_properties_typeProperties_tenant": {
 						"value": "[parameters('Hive_properties_typeProperties_tenant')]"
+					},
+					"spark_properties_typeProperties_userName": {
+						"value": "[parameters('spark_properties_typeProperties_userName')]"
 					}
 				}
 			},

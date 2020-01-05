@@ -20,6 +20,9 @@
 		"Hive_servicePrincipalKey": {
 			"value": ""
 		},
+		"spark_password": {
+			"value": ""
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"value": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
 		},
@@ -31,6 +34,9 @@
 		},
 		"Hive_properties_typeProperties_tenant": {
 			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"spark_properties_typeProperties_userName": {
+			"value": "admin"
 		}
 	}
 }
