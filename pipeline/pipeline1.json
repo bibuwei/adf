@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Hive1",
+				"name": "Hive11",
 				"type": "HDInsightHive",
 				"dependsOn": [],
 				"policy": {
