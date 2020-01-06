@@ -1,0 +1,45 @@
+{
+	"name": "AMLA",
+	"properties": {
+		"activities": [
+			{
+				"name": "ML Batch Execution",
+				"type": "AzureMLBatchExecution",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"webServiceInputs": {
+						"input1": {
+							"filePath": "mljobs/TestDataset.csv",
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"webServiceOutputs": {
+						"": {
+							"filePath": "mljobs/out.csv",
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureMLStudio",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
