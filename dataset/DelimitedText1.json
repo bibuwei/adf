@@ -20,11 +20,11 @@
 		},
 		"schema": [
 			{
-				"name": "prop0",
+				"name": "lhs",
 				"type": "String"
 			},
 			{
-				"name": "prop1",
+				"name": "rhs",
 				"type": "String"
 			}
 		]
