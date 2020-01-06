@@ -25,7 +25,7 @@
 						}
 					},
 					"webServiceOutputs": {
-						"": {
+						"output1": {
 							"filePath": "mljobs/out.csv",
 							"linkedServiceName": {
 								"referenceName": "AzureBlobStorage1",
@@ -80,6 +80,7 @@
 						}
 					},
 					"enableStaging": false,
+					"dataIntegrationUnits": 2,
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
