@@ -80,6 +80,7 @@
 						}
 					},
 					"enableStaging": false,
+					"parallelCopies": 1,
 					"dataIntegrationUnits": 2,
 					"translator": {
 						"type": "TabularTranslator",
