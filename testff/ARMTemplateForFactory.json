@@ -149,7 +149,7 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "prop0",
+											"name": "lhs",
 											"type": "String"
 										},
 										"sink": {
@@ -159,7 +159,7 @@
 									},
 									{
 										"source": {
-											"name": "prop1",
+											"name": "rhs",
 											"type": "String"
 										},
 										"sink": {
@@ -453,11 +453,11 @@
 				},
 				"schema": [
 					{
-						"name": "prop0",
+						"name": "lhs",
 						"type": "String"
 					},
 					{
-						"name": "prop1",
+						"name": "rhs",
 						"type": "String"
 					}
 				]
