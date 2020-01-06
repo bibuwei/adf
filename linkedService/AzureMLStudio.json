@@ -1,0 +1,12 @@
+{
+	"name": "AzureMLStudio",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureML",
+		"typeProperties": {
+			"mlEndpoint": "https://asiasoutheast.services.azureml.net/subscriptions/0cdfcf8ce2d34e6ea1f3b9e355d5ccd7/services/92c1e8630cd5442f8231e6c022a9f1c6/jobs?api-version=2.0",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RGRl85N2ZjOTdjZi1iZDQzLTRjMzYtYjJkOC1mZGU4NmIwODE4NGEiDQp9"
+		}
+	}
+}
