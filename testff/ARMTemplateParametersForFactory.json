@@ -29,6 +29,9 @@
 		"spark_password": {
 			"value": ""
 		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"value": ""
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"value": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
 		},
@@ -43,6 +46,21 @@
 		},
 		"spark_properties_typeProperties_userName": {
 			"value": "admin"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"value": "adlabwin"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"value": "b250136c-5691-490b-8f85-31f74de7a4f4"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"value": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"value": "IT"
 		}
 	}
 }

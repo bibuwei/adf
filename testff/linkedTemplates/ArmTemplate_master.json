@@ -39,6 +39,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'spark'"
 		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"type": "string",
 			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
@@ -58,6 +62,26 @@
 		"spark_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admin"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "adlabwin"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b250136c-5691-490b-8f85-31f74de7a4f4"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "IT"
 		},
 		"containerUri": {
 			"type": "string",
@@ -98,6 +122,9 @@
 					"Azureadls_connectionString": {
 						"value": "[parameters('Azureadls_connectionString')]"
 					},
+					"AzureDataLakeAnalytics1_servicePrincipalKey": {
+						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
+					},
 					"Hive_clusterPassword": {
 						"value": "[parameters('Hive_clusterPassword')]"
 					},
@@ -109,6 +136,21 @@
 					},
 					"spark_password": {
 						"value": "[parameters('spark_password')]"
+					},
+					"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_accountName')]"
+					},
+					"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
 					},
 					"Hive_properties_typeProperties_hostSubscriptionId": {
 						"value": "[parameters('Hive_properties_typeProperties_hostSubscriptionId')]"

@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Azureadls'"
 		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
+		},
 		"Hive_clusterPassword": {
 			"type": "secureString",
 			"metadata": "Secure string for 'clusterPassword' of 'Hive'"
@@ -38,6 +42,26 @@
 		"spark_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'spark'"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "adlabwin"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b250136c-5691-490b-8f85-31f74de7a4f4"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "IT"
 		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"type": "string",
@@ -116,6 +140,27 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('Azureadls_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_accountName')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
 				}
 			},
 			"dependsOn": []
@@ -260,6 +305,44 @@
 				}
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/U_sql')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Process_Sales",
+						"type": "DataLakeAnalyticsU-SQL",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"scriptPath": "adlaactiviry/salesprocess.usql",
+							"scriptLinkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDataLakeAnalytics1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeAnalytics1')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
