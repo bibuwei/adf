@@ -627,7 +627,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "*.csv",
 						"folderPath": "FactDataCSV",
 						"container": "databricksactiviry"
 					}
