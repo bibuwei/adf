@@ -1,0 +1,250 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "testff"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/StoredProcedure')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "SalesOrderID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SalesOrderID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "StoreId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "StoreId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "OrderDate",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OrderDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "SubTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SubTotal",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Taxperc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Taxperc",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TaxAmt",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TaxAmt",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Freightperc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Freightperc",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Freight",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Freight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalDue",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TotalDue",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesOrderDetailID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SalesOrderDetailID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "OrderQty",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OrderQty",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "UnitPrice",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UnitPrice",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "UnitPriceDiscount",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UnitPriceDiscount",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "LineTotal",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LineTotal",
+											"type": "Decimal"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "All_Sales_Records",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "All_Sales_Records_Raw",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Stored Procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[adfstoredprocactivity]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
