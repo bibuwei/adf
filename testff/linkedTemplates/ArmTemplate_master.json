@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureBlobStorageDB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageDB'"
+		},
 		"AzureDataLakeAnalytics1_servicePrincipalKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
@@ -22,6 +26,10 @@
 		"AzureMLStudio_apiKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'apiKey' of 'AzureMLStudio'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
 		"AzureSynapseAnalytics1_connectionString": {
 			"type": "secureString",
@@ -117,6 +125,9 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureBlobStorageDB_connectionString": {
+						"value": "[parameters('AzureBlobStorageDB_connectionString')]"
+					},
 					"AzureDataLakeAnalytics1_servicePrincipalKey": {
 						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
 					},
@@ -125,6 +136,9 @@
 					},
 					"AzureMLStudio_apiKey": {
 						"value": "[parameters('AzureMLStudio_apiKey')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
 					"AzureSynapseAnalytics1_connectionString": {
 						"value": "[parameters('AzureSynapseAnalytics1_connectionString')]"
