@@ -31,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"AzureSqlDatabaseCF_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseCF'"
+		},
 		"AzureSynapseAnalytics1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
@@ -140,23 +144,14 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
+					"AzureSqlDatabaseCF_connectionString": {
+						"value": "[parameters('AzureSqlDatabaseCF_connectionString')]"
+					},
 					"AzureSynapseAnalytics1_connectionString": {
 						"value": "[parameters('AzureSynapseAnalytics1_connectionString')]"
 					},
 					"Azureadls_connectionString": {
 						"value": "[parameters('Azureadls_connectionString')]"
-					},
-					"Hive_clusterPassword": {
-						"value": "[parameters('Hive_clusterPassword')]"
-					},
-					"Hive_clusterSshPassword": {
-						"value": "[parameters('Hive_clusterSshPassword')]"
-					},
-					"Hive_servicePrincipalKey": {
-						"value": "[parameters('Hive_servicePrincipalKey')]"
-					},
-					"spark_password": {
-						"value": "[parameters('spark_password')]"
 					},
 					"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
 						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_accountName')]"
@@ -172,21 +167,6 @@
 					},
 					"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
 						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
-					},
-					"Hive_properties_typeProperties_hostSubscriptionId": {
-						"value": "[parameters('Hive_properties_typeProperties_hostSubscriptionId')]"
-					},
-					"Hive_properties_typeProperties_clusterResourceGroup": {
-						"value": "[parameters('Hive_properties_typeProperties_clusterResourceGroup')]"
-					},
-					"Hive_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('Hive_properties_typeProperties_servicePrincipalId')]"
-					},
-					"Hive_properties_typeProperties_tenant": {
-						"value": "[parameters('Hive_properties_typeProperties_tenant')]"
-					},
-					"spark_properties_typeProperties_userName": {
-						"value": "[parameters('spark_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -205,6 +185,33 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Hive_clusterPassword": {
+						"value": "[parameters('Hive_clusterPassword')]"
+					},
+					"Hive_clusterSshPassword": {
+						"value": "[parameters('Hive_clusterSshPassword')]"
+					},
+					"Hive_servicePrincipalKey": {
+						"value": "[parameters('Hive_servicePrincipalKey')]"
+					},
+					"spark_password": {
+						"value": "[parameters('spark_password')]"
+					},
+					"Hive_properties_typeProperties_hostSubscriptionId": {
+						"value": "[parameters('Hive_properties_typeProperties_hostSubscriptionId')]"
+					},
+					"Hive_properties_typeProperties_clusterResourceGroup": {
+						"value": "[parameters('Hive_properties_typeProperties_clusterResourceGroup')]"
+					},
+					"Hive_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('Hive_properties_typeProperties_servicePrincipalId')]"
+					},
+					"Hive_properties_typeProperties_tenant": {
+						"value": "[parameters('Hive_properties_typeProperties_tenant')]"
+					},
+					"spark_properties_typeProperties_userName": {
+						"value": "[parameters('spark_properties_typeProperties_userName')]"
 					}
 				}
 			},
