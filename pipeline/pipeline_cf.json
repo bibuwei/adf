@@ -155,7 +155,7 @@
 							"typeProperties": {
 								"storedProcedureName": "[dbo].[spupdatewatermark]",
 								"storedProcedureParameters": {
-									"RecordModifedtime": {
+									"RecordModifiedtime": {
 										"value": {
 											"value": "@{activity('LookupNewWatermark').output.firstRow.NewWatermarkvalue}",
 											"type": "Expression"
