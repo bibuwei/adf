@@ -812,6 +812,7 @@
 								"value": "@pipeline().parameters.tablenames",
 								"type": "Expression"
 							},
+							"isSequential": false,
 							"activities": [
 								{
 									"name": "LookupNewWatermark",
@@ -1003,7 +1004,7 @@
 										"method": "POST",
 										"headers": {},
 										"body": {
-											"value": "{\npipeline_run_time: @{pipeline().TriggerTime},\ndata_factory_name:@{pipeline().DataFactory}\n}",
+											"value": "{\npipeline_run_time:@{pipeline().TriggerTime},\ndata_factory_name:@{pipeline().DataFactory}\n}",
 											"type": "Expression"
 										}
 									}
