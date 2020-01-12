@@ -1,0 +1,80 @@
+{
+	"name": "pipeline_cf",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEachSourceTable",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.tablenames",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "LookupNewWatermark",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select MAX(@{item().WaterMark_Column}) as\nNewWatermarkvalue from @{item().TABLE_NAME} ",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"dataset": {
+									"referenceName": "AzureSqlTable_cf",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "LookupOldWatermark",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00"
+								},
+								"dataset": {
+									"referenceName": "cfsourcesql",
+									"type": "DatasetReference"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"tablenames": {
+				"type": "array"
+			}
+		},
+		"folder": {
+			"name": "PilelineFlow"
+		},
+		"annotations": []
+	}
+}
