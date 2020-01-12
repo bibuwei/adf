@@ -965,7 +965,7 @@
 										"method": "POST",
 										"headers": {},
 										"body": {
-											"value": "{\npipeline_run_time:@{pipeline().TriggerTime},\ndata_factory_name:@{pipeline().DataFactory}\n}",
+											"value": "{\npipeline_run_time:@{pipeline().RunId},\ndata_factory_name:@{pipeline().DataFactory}\n}",
 											"type": "Expression"
 										}
 									}
