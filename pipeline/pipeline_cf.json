@@ -56,7 +56,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select Table_Name, WatermarkValue from Config where\nTable_Name = '@{item().TABLE_NAME}",
+										"value": "select Table_Name, WatermarkValue from Config where\nTable_Name = '@{item().TABLE_NAME}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00"
