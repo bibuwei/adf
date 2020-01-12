@@ -1004,9 +1004,11 @@
 										"method": "POST",
 										"headers": {},
 										"body": {
-											"value": "{\npipeline_run_time:@{pipeline().RunId},\ndata_factory_name:@{pipeline().DataFactory}\n}",
+											"value": "{\ndata_factory_name:@{pipeline().DataFactory},\npileline_run_time:@{pipeline().DataFactory}\n}",
 											"type": "Expression"
-										}
+										},
+										"linkedServices": [],
+										"datasets": []
 									}
 								}
 							]
