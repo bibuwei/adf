@@ -55,12 +55,125 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select Table_Name, WatermarkValue from Config where\nTable_Name = '@{item().TABLE_NAME}",
+										"type": "Expression"
+									},
 									"queryTimeout": "02:00:00"
 								},
 								"dataset": {
 									"referenceName": "cfsourcesql",
 									"type": "DatasetReference"
 								}
+							}
+						},
+						{
+							"name": "getData",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "LookupNewWatermark",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "LookupOldWatermark",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "select * from @{item().TABLE_NAME} where @{item().\nWaterMark_Column} > '@{activity('LookupOldWatermark').\noutput.firstRow.WatermarkValue}' and @{item().\nWaterMark_Column} <= '@{activity('LookupNewWatermark').\noutput.firstRow.NewWatermarkvalue}'",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSqlTable_cf",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DelimitedText3_cf",
+									"type": "DatasetReference",
+									"parameters": {
+										"foldername": {
+											"value": "@CONCAT(item().TABLE_NAME, pipeline().RunId, '.txt')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "UpdateConfgTable",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "getData",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[spupdatewatermark]",
+								"storedProcedureParameters": {
+									"RecordModifedtime": {
+										"value": {
+											"value": "@{activity('LookupNewWatermark').output.firstRow.NewWatermarkvalue}",
+											"type": "Expression"
+										},
+										"type": "Datetime"
+									},
+									"TableName": {
+										"value": {
+											"value": "@{activity('LookupOldwatermark').output.firstRow.Table_Name}",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabaseCF",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
