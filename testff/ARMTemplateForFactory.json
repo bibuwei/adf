@@ -1004,8 +1004,8 @@
 										"method": "POST",
 										"headers": {},
 										"body": {
-											"data_factory_name": "testff111",
-											"pileline_run_time": "testff222"
+											"value": "{\n\"data_factory_name\":\"@{pipeline().DataFactory}\",\n\"pipeline_run_time\":\"@{pipeline().TriggerTime}\"\n}",
+											"type": "Expression"
 										}
 									}
 								}
