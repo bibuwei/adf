@@ -200,8 +200,8 @@
 								"url": "https://prod-30.southeastasia.logic.azure.com:443/workflows/6e3818e15d914bb6badf722b56e2f8c5/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=brS0kO2IUkAx3rCmUeneewuMSVpnqQeoqo-v_nFqTIc",
 								"method": "POST",
 								"body": {
-									"data_factory_name": "testff111",
-									"pileline_run_time": "testff222"
+									"value": "{\n\"data_factory_name\":\"@{pipeline().DataFactory}\",\n\"pipeline_run_time\":\"@{pipeline().TriggerTime}\"\n}",
+									"type": "Expression"
 								}
 							}
 						}
