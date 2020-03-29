@@ -19,6 +19,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+		},
 		"AzureDatabricks1_accessToken": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
@@ -79,6 +87,14 @@
 			"type": "string",
 			"defaultValue": "IT"
 		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hdibwin.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://hdibwin.dfs.core.windows.net"
+		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"type": "string",
 			"defaultValue": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
@@ -135,6 +151,12 @@
 					"AzureDataLakeAnalytics1_servicePrincipalKey": {
 						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
 					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureDataLakeStorage2_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					},
 					"AzureDatabricks1_accessToken": {
 						"value": "[parameters('AzureDatabricks1_accessToken')]"
 					},
@@ -167,6 +189,12 @@
 					},
 					"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
 						"value": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage2_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]"
 					}
 				}
 			},

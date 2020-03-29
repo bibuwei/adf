@@ -14,6 +14,12 @@
 		"AzureDataLakeAnalytics1_servicePrincipalKey": {
 			"value": ""
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
 		"AzureDatabricks1_accessToken": {
 			"value": ""
 		},
@@ -58,6 +64,12 @@
 		},
 		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
 			"value": "IT"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://hdibwin.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://hdibwin.dfs.core.windows.net"
 		},
 		"Hive_properties_typeProperties_hostSubscriptionId": {
 			"value": "0cdfcf8c-e2d3-4e6e-a1f3-b9e355d5ccd7"
