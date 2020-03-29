@@ -1,0 +1,60 @@
+{
+	"name": "Auto",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "TechSummit",
+				"fileSystem": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "mpg",
+				"type": "String"
+			},
+			{
+				"name": "cylinders",
+				"type": "String"
+			},
+			{
+				"name": "displacement",
+				"type": "String"
+			},
+			{
+				"name": "horsepower",
+				"type": "String"
+			},
+			{
+				"name": "weight",
+				"type": "String"
+			},
+			{
+				"name": "acceleration",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "origin",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			}
+		]
+	}
+}
