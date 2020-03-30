@@ -1,5 +1,5 @@
 {
-	"name": "Auto",
+	"name": "Auto1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage2",
@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "Auto1.csv",
 				"folderPath": "TechSummit",
 				"fileSystem": "data"
 			},
