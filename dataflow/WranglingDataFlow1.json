@@ -28,7 +28,7 @@
 						"referenceName": "AutoMerge1",
 						"type": "DatasetReference"
 					},
-					"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
+					"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['mergeAuto.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Sink1"
 				}
 			],
 			"script": "section Section1;\r\nshared Auto1 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto1.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared Auto2 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto2.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = Auto1\r\nin\r\n  Source;\r\n"
