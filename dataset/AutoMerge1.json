@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "AutoMerge1.csv",
 				"fileSystem": "data"
 			},
 			"columnDelimiter": ",",
