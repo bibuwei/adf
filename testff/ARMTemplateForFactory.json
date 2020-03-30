@@ -436,7 +436,8 @@
 								"referenceName": "WranglingDataFlow1",
 								"type": "DataFlowReference",
 								"datasetParameters": {
-									"Auto": {},
+									"Auto1": {},
+									"Auto2": {},
 									"Sink1": {}
 								}
 							},
@@ -1314,7 +1315,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Auto')]",
+			"name": "[concat(parameters('factoryName'), '/Auto1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1327,6 +1328,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "Auto1.csv",
 						"folderPath": "TechSummit",
 						"fileSystem": "data"
 					},
@@ -1439,6 +1441,33 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AutoMerge1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
@@ -2226,10 +2255,18 @@
 				"typeProperties": {
 					"sources": [
 						{
-							"name": "Auto",
+							"name": "Auto1",
 							"script": "",
 							"dataset": {
-								"referenceName": "Auto",
+								"referenceName": "Auto1",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "Auto2",
+							"script": "",
+							"dataset": {
+								"referenceName": "Auto2",
 								"type": "DatasetReference"
 							}
 						}
@@ -2238,18 +2275,19 @@
 						{
 							"name": "Sink1",
 							"dataset": {
-								"referenceName": "DelimitedText4",
+								"referenceName": "AutoMerge1",
 								"type": "DatasetReference"
 							},
-							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
+							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['mergeAuto.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
 						}
 					],
-					"script": "section Section1;\r\nshared Auto = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto1.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = Auto\r\nin\r\n  Source;\r\n"
+					"script": "section Section1;\r\nshared Auto1 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto1.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared Auto2 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto2.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = Auto1\r\nin\r\n  Source;\r\n"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Auto')]",
-				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]"
+				"[concat(variables('factoryId'), '/datasets/Auto1')]",
+				"[concat(variables('factoryId'), '/datasets/Auto2')]",
+				"[concat(variables('factoryId'), '/datasets/AutoMerge1')]"
 			]
 		}
 	]

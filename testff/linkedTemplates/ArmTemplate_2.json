@@ -13,6 +13,235 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_cf')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEachSourceTable",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.tablenames",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "LookupNewWatermark",
+									"type": "Lookup",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderQuery": {
+												"value": "select MAX(@{item().WaterMark_Column}) as\nNewWatermarkvalue from @{item().TABLE_NAME} ",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00"
+										},
+										"dataset": {
+											"referenceName": "AzureSqlTable_cf",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									}
+								},
+								{
+									"name": "LookupOldWatermark",
+									"type": "Lookup",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderQuery": {
+												"value": "select Table_Name, WatermarkValue from Config where\nTable_Name = '@{item().TABLE_NAME}'",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00"
+										},
+										"dataset": {
+											"referenceName": "cfsourcesql",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									}
+								},
+								{
+									"name": "getData",
+									"type": "Copy",
+									"dependsOn": [
+										{
+											"activity": "LookupNewWatermark",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										},
+										{
+											"activity": "LookupOldWatermark",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderQuery": {
+												"value": "select * from @{item().TABLE_NAME} where @{item().\nWaterMark_Column} > '@{activity('LookupOldWatermark').\noutput.firstRow.WatermarkValue}' and @{item().\nWaterMark_Column} <= '@{activity('LookupNewWatermark').\noutput.firstRow.NewWatermarkvalue}'",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00"
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobStorageWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "AzureSqlTable_cf",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DelimitedText3_cf",
+											"type": "DatasetReference",
+											"parameters": {
+												"foldername": {
+													"value": "@CONCAT(item().TABLE_NAME, pipeline().RunId, '.txt')",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"name": "UpdateConfgTable",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "getData",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[spupdatewatermark]",
+										"storedProcedureParameters": {
+											"RecordModifiedtime": {
+												"value": {
+													"value": "@{activity('LookupNewWatermark').output.firstRow.NewWatermarkvalue}",
+													"type": "Expression"
+												},
+												"type": "Datetime"
+											},
+											"TableName": {
+												"value": {
+													"value": "@{activity('LookupOldwatermark').output.firstRow.Table_Name}",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AzureSqlDatabaseCF",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "SendEmailAdmin",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "UpdateConfgTable",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"url": "https://prod-30.southeastasia.logic.azure.com:443/workflows/6e3818e15d914bb6badf722b56e2f8c5/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=brS0kO2IUkAx3rCmUeneewuMSVpnqQeoqo-v_nFqTIc",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "{\n\"data_factory_name\":\"@{pipeline().DataFactory}\",\n\"pipeline_run_time\":\"@{pipeline().TriggerTime}\"\n}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"tablenames": {
+						"type": "array"
+					}
+				},
+				"folder": {
+					"name": "PilelineFlow"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/spark')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -57,10 +286,18 @@
 				"typeProperties": {
 					"sources": [
 						{
-							"name": "Auto",
+							"name": "Auto1",
 							"script": "",
 							"dataset": {
-								"referenceName": "Auto",
+								"referenceName": "Auto1",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "Auto2",
+							"script": "",
+							"dataset": {
+								"referenceName": "Auto2",
 								"type": "DatasetReference"
 							}
 						}
@@ -69,13 +306,13 @@
 						{
 							"name": "Sink1",
 							"dataset": {
-								"referenceName": "DelimitedText4",
+								"referenceName": "AutoMerge1",
 								"type": "DatasetReference"
 							},
-							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
+							"script": "sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['mergeAuto.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
 						}
 					],
-					"script": "section Section1;\r\nshared Auto = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto1.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = Auto\r\nin\r\n  Source;\r\n"
+					"script": "section Section1;\r\nshared Auto1 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto1.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared Auto2 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://hdibwin.dfs.core.windows.net/data/TechSummit/Auto2.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = Auto1\r\nin\r\n  Source;\r\n"
 				}
 			},
 			"dependsOn": []
@@ -103,7 +340,8 @@
 								"referenceName": "WranglingDataFlow1",
 								"type": "DataFlowReference",
 								"datasetParameters": {
-									"Auto": {},
+									"Auto1": {},
+									"Auto2": {},
 									"Sink1": {}
 								}
 							},
