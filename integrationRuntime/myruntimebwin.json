@@ -1,0 +1,6 @@
+{
+	"name": "myruntimebwin",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
