@@ -1,0 +1,464 @@
+{
+	"name": "CopyPipeline_4cl",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_4cl",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "member_additional"
+					},
+					{
+						"name": "Destination",
+						"value": ".member_additional"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureMySqlSource"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "linkedService1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "member_id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "member_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "marital_status",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "marital_status",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "total_consumable_point",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "total_consumable_point",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "transport",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "transport",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "education",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "education",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "dedication_amount",
+									"type": "Decimal",
+									"physicalType": "decimal"
+								},
+								"sink": {
+									"name": "dedication_amount",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "annual_fee_type",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "annual_fee_type",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "auto_pay",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "auto_pay",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "auto_minus_fee",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "auto_minus_fee",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "accept_sys_sms",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "accept_sys_sms",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "accept_market_sms",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "accept_market_sms",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "effect_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "effect_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "have_car",
+									"type": "Boolean",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "have_car",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "auditor",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "auditor",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "accept_contact",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "accept_contact",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "constellation",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "constellation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "religion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "religion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nation",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "nation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "mobile_bind_flag",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "mobile_bind_flag",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "email_bind_flag",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "email_bind_flag",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "pay_passwd",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "pay_passwd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "back_nums",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "back_nums",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "valid_rule_id",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "valid_rule_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "name_spell",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "name_spell",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "con_fee_time",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "con_fee_time",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "crm_password",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "crm_password",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "deleted",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "deleted",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"name": "created_at",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "created_by",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "created_by",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "updated_at",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "updated_by",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "updated_by",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "countrie",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "countrie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "professional",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "professional",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "identity_type",
+									"type": "SByte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "identity_type",
+									"type": "SByte"
+								}
+							},
+							{
+								"source": {
+									"name": "identity_code",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "identity_code",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_4cl",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_4cl",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
