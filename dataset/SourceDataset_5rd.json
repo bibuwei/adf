@@ -1,0 +1,232 @@
+{
+	"name": "SourceDataset_5rd",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureMySql1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "member_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "marital_status",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "total_consumable_point",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "transport",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "education",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "dedication_amount",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "annual_fee_type",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "auto_pay",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "auto_minus_fee",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "accept_sys_sms",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "accept_market_sms",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "effect_date",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "have_car",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "auditor",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "accept_contact",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "constellation",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "religion",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "nation",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "mobile_bind_flag",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "email_bind_flag",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "pay_passwd",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "back_nums",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "valid_rule_id",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "name_spell",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "con_fee_time",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "crm_password",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "deleted",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "created_at",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "created_by",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "updated_at",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "updated_by",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "countrie",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "professional",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "identity_type",
+				"type": "tinyint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "identity_code",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"tableName": "member_additional"
+		}
+	}
+}
