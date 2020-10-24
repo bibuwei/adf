@@ -5,6 +5,15 @@
 		"factoryName": {
 			"value": "bwindatafactory"
 		},
+		"AzureMySql1_connectionString": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://iot-vault-wskvnic4guiya.vault.azure.net/"
 		}
