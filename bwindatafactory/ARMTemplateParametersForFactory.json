@@ -27,7 +27,7 @@
 			"value": "https://iot-vault-wskvnic4guiya.vault.azure.net/"
 		},
 		"HttpServer_sharepoit_properties_typeProperties_url": {
-			"value": "https://microsoftapc.sharepoint.com/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
+			"value": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
 		},
 		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
 			"value": "76825dbc-5781-4c34-8f46-c9c47b665cc2"

@@ -37,7 +37,7 @@
 		},
 		"HttpServer_sharepoit_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://microsoftapc.sharepoint.com/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
+			"defaultValue": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
 		},
 		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
