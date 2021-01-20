@@ -35,6 +35,10 @@
 			"type": "string",
 			"defaultValue": "https://iot-vault-wskvnic4guiya.vault.azure.net/"
 		},
+		"HttpServer_sharepoit_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://microsoftapc.sharepoint.com/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
+		},
 		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "76825dbc-5781-4c34-8f46-c9c47b665cc2"
@@ -86,6 +90,9 @@
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"HttpServer_sharepoit_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer_sharepoit_properties_typeProperties_url')]"
 					},
 					"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('SharePointOnlineList1_properties_typeProperties_servicePrincipalId')]"
