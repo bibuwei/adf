@@ -37,7 +37,7 @@
 		},
 		"HttpServer_sharepoit_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value"
+			"defaultValue": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/test.xlsx')/$value"
 		},
 		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
@@ -1304,7 +1304,7 @@
 							"timeout": "7.00:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
+							"secureOutput": true,
 							"secureInput": false
 						},
 						"userProperties": [],
@@ -1333,7 +1333,7 @@
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
-							"secureInput": false
+							"secureInput": true
 						},
 						"userProperties": [],
 						"typeProperties": {
