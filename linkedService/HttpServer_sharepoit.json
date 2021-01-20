@@ -1,0 +1,12 @@
+{
+	"name": "HttpServer_sharepoit",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://microsoftapc.sharepoint.com/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/files/2/案例数据2017年4月30日.xlsx')/$value",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
