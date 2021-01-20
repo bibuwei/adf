@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Process",
+				"name": "Process 1",
 				"type": "HDInsightPig",
 				"dependsOn": [],
 				"policy": {
