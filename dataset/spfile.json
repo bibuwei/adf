@@ -1,0 +1,16 @@
+{
+	"name": "spfile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer_sharepoit",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		}
+	}
+}
