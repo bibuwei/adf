@@ -1,6 +1,84 @@
 {
 	"name": "AEONPerf",
 	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.days",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlDWSource",
+									"sqlReaderQuery": {
+										"value": "SELECT [Sale Key]\n      ,[City Key]\n      ,[Customer Key]\n      ,[Bill To Customer Key]\n      ,[Stock Item Key]\n      ,[Invoice Date Key]\n      ,[Delivery Date Key]\n      ,[Salesperson Key]\n      ,[WWI Invoice ID]\n      ,[Description]\n      ,[Package]\n      ,[Quantity]\n      ,[Unit Price]\n      ,[Tax Rate]\n      ,[Total Excluding Tax]\n      ,[Tax Amount]\n      ,[Profit]\n      ,[Total Including Tax]\n      ,[Total Dry Items]\n      ,[Total Chiller Items]\n      ,[Lineage Key]\n  FROM [wwi].[fact_Sale]\n  WHERE [Invoice Date Key] =item()",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSynapseAnalyticsTable1",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DelimitedText2",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"days": {
+				"type": "array"
+			}
+		},
 		"annotations": []
 	}
 }
