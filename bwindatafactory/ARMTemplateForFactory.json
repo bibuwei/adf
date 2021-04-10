@@ -86,7 +86,7 @@
 										"source": {
 											"type": "SqlDWSource",
 											"sqlReaderQuery": {
-												"value": "SELECT [Sale Key]\n      ,[City Key]\n      ,[Customer Key]\n      ,[Bill To Customer Key]\n      ,[Stock Item Key]\n      ,[Invoice Date Key]\n      ,[Delivery Date Key]\n      ,[Salesperson Key]\n      ,[WWI Invoice ID]\n      ,[Description]\n      ,[Package]\n      ,[Quantity]\n      ,[Unit Price]\n      ,[Tax Rate]\n      ,[Total Excluding Tax]\n      ,[Tax Amount]\n      ,[Profit]\n      ,[Total Including Tax]\n      ,[Total Dry Items]\n      ,[Total Chiller Items]\n      ,[Lineage Key]\n  FROM [wwi].[fact_Sale]\n  WHERE [Invoice Date Key] =@item()",
+												"value": "SELECT [Sale Key]\n      ,[City Key]\n      ,[Customer Key]\n      ,[Bill To Customer Key]\n      ,[Stock Item Key]\n      ,[Invoice Date Key]\n      ,[Delivery Date Key]\n      ,[Salesperson Key]\n      ,[WWI Invoice ID]\n      ,[Description]\n      ,[Package]\n      ,[Quantity]\n      ,[Unit Price]\n      ,[Tax Rate]\n      ,[Total Excluding Tax]\n      ,[Tax Amount]\n      ,[Profit]\n      ,[Total Including Tax]\n      ,[Total Dry Items]\n      ,[Total Chiller Items]\n      ,[Lineage Key]\n  FROM [wwi].[fact_Sale]\n  WHERE [Invoice Date Key] ='@item()'",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
