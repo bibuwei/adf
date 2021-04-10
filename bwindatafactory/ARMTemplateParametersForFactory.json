@@ -14,7 +14,10 @@
 		"AzureSynapseAnalytics1_connectionString": {
 			"value": ""
 		},
-		"SharePointOnlineList1_servicePrincipalKey": {
+		"WorldImporters_connectionString": {
+			"value": ""
+		},
+		"bwinadls_accountKey": {
 			"value": ""
 		},
 		"linkedService1_connectionString": {
@@ -29,8 +32,8 @@
 		"HttpServer_sharepoit_properties_typeProperties_url": {
 			"value": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/test.xlsx')/$value"
 		},
-		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
-			"value": "76825dbc-5781-4c34-8f46-c9c47b665cc2"
+		"bwinadls_properties_typeProperties_url": {
+			"value": "https://bwinstoreadls.dfs.core.windows.net"
 		}
 	}
 }

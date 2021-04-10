@@ -19,9 +19,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
 		},
-		"SharePointOnlineList1_servicePrincipalKey": {
+		"WorldImporters_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'SharePointOnlineList1'"
+			"metadata": "Secure string for 'connectionString' of 'WorldImporters'"
+		},
+		"bwinadls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'bwinadls'"
 		},
 		"linkedService1_connectionString": {
 			"type": "secureString",
@@ -39,9 +43,9 @@
 			"type": "string",
 			"defaultValue": "https://microsoftapc.sharepoint.com/teams/testpbi/_api/web/GetFileByServerRelativeUrl('/teams/testpbi/Shared Documents/test.xlsx')/$value"
 		},
-		"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
+		"bwinadls_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "76825dbc-5781-4c34-8f46-c9c47b665cc2"
+			"defaultValue": "https://bwinstoreadls.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -79,8 +83,11 @@
 					"AzureSynapseAnalytics1_connectionString": {
 						"value": "[parameters('AzureSynapseAnalytics1_connectionString')]"
 					},
-					"SharePointOnlineList1_servicePrincipalKey": {
-						"value": "[parameters('SharePointOnlineList1_servicePrincipalKey')]"
+					"WorldImporters_connectionString": {
+						"value": "[parameters('WorldImporters_connectionString')]"
+					},
+					"bwinadls_accountKey": {
+						"value": "[parameters('bwinadls_accountKey')]"
 					},
 					"linkedService1_connectionString": {
 						"value": "[parameters('linkedService1_connectionString')]"
@@ -94,12 +101,32 @@
 					"HttpServer_sharepoit_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer_sharepoit_properties_typeProperties_url')]"
 					},
-					"SharePointOnlineList1_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('SharePointOnlineList1_properties_typeProperties_servicePrincipalId')]"
+					"bwinadls_properties_typeProperties_url": {
+						"value": "[parameters('bwinadls_properties_typeProperties_url')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "bwindatafactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'bwindatafactory_ArmTemplate_0')]"
+			]
 		}
 	]
 }
