@@ -1,0 +1,102 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "bwindatafactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AEONPerf_copy5')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.days",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"batchCount": 10,
+							"activities": [
+								{
+									"name": "Execute Pipeline1",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "AEONPerf_copy4",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"days": {
+												"value": "@item()",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"concurrency": 10,
+				"parameters": {
+					"days": {
+						"type": "array",
+						"defaultValue": [
+							47,
+							35,
+							25,
+							15,
+							39,
+							38,
+							30,
+							26,
+							52,
+							41,
+							28,
+							19,
+							29,
+							21,
+							36,
+							23,
+							7,
+							9,
+							8,
+							40,
+							51,
+							12,
+							48,
+							6,
+							11,
+							27,
+							4,
+							45,
+							31,
+							50,
+							54,
+							49
+						]
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
