@@ -30,7 +30,7 @@
 								"source": {
 									"type": "SqlDWSource",
 									"sqlReaderQuery": {
-										"value": "SELECT *\n  FROM [wwi].[fact_Sale]\n  where [City Key]='@item()'",
+										"value": "SELECT *\n  FROM [wwi].[fact_Sale]\n  where [City Key]='item()'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -78,7 +78,8 @@
 			"days": {
 				"type": "array",
 				"defaultValue": [
-					37955
+					37955,
+					38005
 				]
 			}
 		},
