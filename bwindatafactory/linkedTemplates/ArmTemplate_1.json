@@ -263,7 +263,7 @@
 											"type": "DelimitedTextSink",
 											"storeSettings": {
 												"type": "AzureBlobFSWriteSettings",
-												"maxConcurrentConnections": 1,
+												"maxConcurrentConnections": 10,
 												"blockSizeInMB": 24
 											},
 											"formatSettings": {
@@ -273,7 +273,7 @@
 											}
 										},
 										"enableStaging": false,
-										"parallelCopies": 1,
+										"parallelCopies": 10,
 										"translator": {
 											"type": "TabularTranslator",
 											"typeConversion": true,
