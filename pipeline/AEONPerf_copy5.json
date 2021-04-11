@@ -1,0 +1,83 @@
+{
+	"name": "AEONPerf_copy5",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.days",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"batchCount": 10,
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "AEONPerf_copy4",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"days": {
+										"value": "@item()",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"concurrency": 10,
+		"parameters": {
+			"days": {
+				"type": "array",
+				"defaultValue": [
+					47,
+					35,
+					25,
+					15,
+					39,
+					38,
+					30,
+					26,
+					52,
+					41,
+					28,
+					19,
+					29,
+					21,
+					36,
+					23,
+					7,
+					9,
+					8,
+					40,
+					51,
+					12,
+					48,
+					6,
+					11,
+					27,
+					4,
+					45,
+					31,
+					50,
+					54,
+					49
+				]
+			}
+		},
+		"annotations": []
+	}
+}
