@@ -30,7 +30,7 @@
 								"source": {
 									"type": "SqlDWSource",
 									"sqlReaderQuery": {
-										"value": "SELECT *\n  FROM [wwi].[fact_Sale]\n  where [Invoice Date Key]='item()'",
+										"value": "SELECT *\n  FROM [wwi].[fact_Sale]\n  where [Invoice Date Key]='@{item()}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
