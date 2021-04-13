@@ -276,11 +276,17 @@
 					"referenceName": "bwinadls",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "@concat(dataset().filename,'.csv')",
 						"fileSystem": "test"
 					},
 					"columnDelimiter": ",",
